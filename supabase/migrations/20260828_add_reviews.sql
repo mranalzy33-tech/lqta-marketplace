@@ -1,0 +1,13 @@
+BEGIN;
+CREATE TABLE IF NOT EXISTS public.reviews(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),order_id uuid NOT NULL REFERENCES public.orders(id) ON DELETE CASCADE,reviewer_id uuid NOT NULL REFERENCES public.users(id),reviewed_user_id uuid NOT NULL REFERENCES public.users(id),rating int NOT NULL CHECK(rating BETWEEN 1 AND 5),comment text,created_at timestamptz NOT NULL DEFAULT now(),UNIQUE(order_id,reviewer_id));
+ALTER TABLE public.reviews ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS public_read_reviews ON public.reviews;
+CREATE POLICY public_read_reviews ON public.reviews FOR SELECT USING(true);
+DROP POLICY IF EXISTS server_only_write_reviews ON public.reviews;
+CREATE POLICY server_only_write_reviews ON public.reviews FOR INSERT WITH CHECK(false);
+DROP POLICY IF EXISTS server_only_update_reviews ON public.reviews;
+CREATE POLICY server_only_update_reviews ON public.reviews FOR UPDATE USING(false) WITH CHECK(false);
+DROP POLICY IF EXISTS server_only_delete_reviews ON public.reviews;
+CREATE POLICY server_only_delete_reviews ON public.reviews FOR DELETE USING(false);
+CREATE INDEX IF NOT EXISTS reviews_reviewed_user_idx ON public.reviews(reviewed_user_id,created_at DESC);
+COMMIT;

@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /account
+Disallow: /wallet
+Disallow: /cart
+Disallow: /offers
+Disallow: /favorites
+Disallow: /notifications
+Disallow: /messages
+Disallow: /disputes
+Disallow: /dispute-queue
+Disallow: /support
+Disallow: /verify
+Disallow: /seller
+Disallow: /admin

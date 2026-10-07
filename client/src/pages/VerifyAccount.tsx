@@ -1,0 +1,8 @@
+import { ArrowRight, BadgeCheck, ShieldCheck } from "lucide-react";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { startLogin } from "@/const";
+
+export default function VerifyAccount() {
+  return <div className="grid min-h-screen place-items-center bg-[radial-gradient(circle_at_top_left,#e6edf3,transparent_37%),#f8fafb] p-5"><div className="w-full max-w-md rounded-[1.75rem] border border-white bg-white p-8 text-center shadow-[0_28px_70px_-38px_rgba(8,30,58,.48)]"><Link href="/" className="inline-flex items-center gap-2 font-black text-[#0b2343]"><span className="grid h-9 w-9 place-items-center rounded-xl bg-[#0b2343] text-[#f8d780]">ل</span>لقطة</Link><span className="mx-auto mt-8 grid h-12 w-12 place-items-center rounded-2xl bg-[#f8e6b4] text-[#ae7819]"><BadgeCheck className="h-6 w-6" /></span><h1 className="mt-5 text-2xl font-black text-[#0b2343]">التحقق من الحساب</h1><p className="mt-3 text-sm leading-7 text-slate-500">التحقق من الهوية والبريد يتم عبر مزود الدخول الموحّد. بعد نجاحه، يُربط ملفك في لقطة بجلسة خادمية آمنة دون عرض مفاتيح أو بيانات حساسة للمتصفح.</p><div className="mt-6 rounded-xl bg-[#f6f9fb] p-4 text-right text-xs leading-6 text-slate-600"><ShieldCheck className="ml-2 inline h-4 w-4 text-[#b87f1c]" />يمكنك إعادة متابعة تدفق الدخول لتحديث جلسة التحقق.</div><Button onClick={startLogin} className="mt-6 h-12 w-full bg-[#0b2343] text-base hover:bg-[#163961]">متابعة التحقق</Button><Link href="/register" className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-[#b87f1c]">إنشاء حساب <ArrowRight className="h-4 w-4" /></Link></div></div>;
+}
