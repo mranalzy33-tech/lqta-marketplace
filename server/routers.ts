@@ -290,6 +290,14 @@ export const appRouter = router({
           input.listingId
         )
       ),
+    remove: protectedProcedure
+      .input(z.object({ listingId: z.string().uuid() }))
+      .mutation(({ ctx, input }) =>
+        marketplace.removeFromCart(
+          getAuthenticatedUser(ctx.user).id,
+          input.listingId
+        )
+      ),
     checkout: protectedProcedure
       .input(z.object({ listingId: z.string().uuid() }))
       .mutation(({ ctx, input }) =>

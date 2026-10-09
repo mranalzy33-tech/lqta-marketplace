@@ -2929,6 +2929,17 @@ export async function getCart(userId: string): Promise<CartItem[]> {
   return (data ?? []) as unknown as CartItem[];
 }
 
+export async function removeFromCart(userId: string, listingId: string) {
+  const client = getSupabaseAdmin();
+  const { error } = await client
+    .from("cart_items")
+    .delete()
+    .eq("user_id", userId)
+    .eq("listing_id", listingId);
+  throwOnError(error, "تعذر حذف المنتج من السلة");
+  return { success: true };
+}
+
 export async function checkout(userId: string, listingId: string) {
   const client = getSupabaseAdmin();
   const { data: listing, error } = await client
